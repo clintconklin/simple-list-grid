@@ -98,6 +98,7 @@
 				});
 			});
 
+			this.$element.css('height', top + this.elems[this.elems.length - 1].height + 'px');
 			this.toggle.html('<i class="fa fa-th" aria-hidden="true"></i>');
 		},
 
@@ -128,6 +129,7 @@
 				});
 			});
 
+			this.$element.css('height', top + this.height + 'px');
 			this.toggle.html('<i class="fa fa-list" aria-hidden="true"></i>');
 		},
 
