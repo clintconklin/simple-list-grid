@@ -5,6 +5,11 @@ body {
 }
 
 .list-grid {
+	-webkit-transition: all $list-grid-transition-time ease-in-out;
+	-moz-transition: all $list-grid-transition-time ease-in-out;
+	-o-transition: all $list-grid-transition-time ease-in-out;
+	transition: all $list-grid-transition-time ease-in-out;
+
 	&:after {
 		content: "";
 		display: table;

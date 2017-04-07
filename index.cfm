@@ -35,6 +35,10 @@
 			</div>
 		</div>
 
+		<hr />
+
+		<p>Here is a paragraph to make sure stuff is resizing correctly</p>
+
 		<script>
 			$('.list-grid').listGrid();
 		</script>
