@@ -17,24 +17,26 @@
 		<!---<p class="clearfix"><a id="toggler" class="btn btn-primary pull-right"><!---<i class="fa fa-list" aria-hidden="true"></i>---><i class="fa fa-th" aria-hidden="true"></i> Switch to Grid</a></p>--->
 
 		<div class="resultset">
-			<ul class="list-grid-ul">
-				<cfloop from="1" to="5" index="current">
-					<li>
-						<div class="thumb">
-							<img src="images/<cfoutput>#current#</cfoutput>.jpg" alt="gallery image or whatever" />
-						</div>
-						<div class="data">
-							<div><b>This is the title</b></div>
-							<div>01/01/2017</div>
-							<div>Lorem ipsum ding dong dang</div>
-						</div>
-					</li>
-				</cfloop>
-			</ul>
+			<div class="list-grid">
+				<ul class="list-grid-ul">
+					<cfloop from="1" to="5" index="current">
+						<li>
+							<div class="thumb">
+								<img src="images/<cfoutput>#current#</cfoutput>.jpg" alt="gallery image or whatever" />
+							</div>
+							<div class="data">
+								<div><b>This is the title</b></div>
+								<div>01/01/2017</div>
+								<div>Lorem ipsum ding dong dang</div>
+							</div>
+						</li>
+					</cfloop>
+				</ul>
+			</div>
 		</div>
 
 		<script>
-			$('.resultset').listGrid();
+			$('.list-grid').listGrid();
 		</script>
 	</body>
 </html>
