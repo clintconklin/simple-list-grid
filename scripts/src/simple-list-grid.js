@@ -1,4 +1,4 @@
-(function($, fnName){
+;(function($, fnName){
 	var debounce = function (func, threshold, execAsap) {
 		var timeout;
 
@@ -22,10 +22,10 @@
 	jQuery.fn[fnName] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(fnName); };
 })(jQuery, 'smartresize');
 
-;(function($, window, document, undefined) {
+(function($, window, document, undefined) {
 	'use strict';
 
-	var pluginName = 'listGrid',
+	var pluginName = 'simpleListGrid',
 		defaults = {
 			'state': 'list',
 			'margin': 10,
@@ -44,7 +44,6 @@
 		this.initialized = false;
 		this.body = $('body');
 		this.list = this.$element.find('ul.list-grid-ul');
-		console.dir(this.list);
 
 		this.state = this.settings.state;
 		this.delay = this.settings.delay; // milliseconds between animations
@@ -95,7 +94,8 @@
 					'top': top + 'px',
 					'left': left + 'px',
 					'width': width + 'px',
-					'height': height + 'px'
+					'height': height + 'px',
+					'opacity': 1
 				});
 			}, ((this.initialized === false) ? 0 : delay));
 		},
@@ -105,6 +105,7 @@
 
 			var top = 0;
 			var delay = 0;
+
 			$.each(this.elems, function(current) {
 				if (current > 0) {
 					top += that.elems[current - 1].height + that.margin;
@@ -125,6 +126,7 @@
 			var top = 0;
 			var left = 0;
 			var delay = this.delay;
+
 			$.each(this.elems, function(current) {
 				if (current > 0) {
 					var newLeft = left + that.elems[current - 1].width + that.margin;
@@ -140,7 +142,11 @@
 				delay += that.delay;
 			});
 
-			this.$element.css('height', top + this.height + 'px');
+			// grid animates up, so wait 'til all the other elements are done
+			window.setTimeout(function() {
+				that.$element.css('height', top + that.height + 'px');
+			}, delay);
+
 			this.toggle.html('<i class="fa fa-list" aria-hidden="true"></i>');
 		},
 
@@ -210,5 +216,4 @@
 			}
 		});
 	};
-
 })(jQuery, window, document);

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>simple list/grid</title>
+
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="scripts/simple-list-grid.js"></script>
+
+		<link href="styles/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+		<link href="styles/styles.css" rel="stylesheet">
+	</head>
+	<body>
+		<h1>simple list/grid</h1>
+
+		<div class="simple-list-grid">
+			<ul class="list-grid-ul">
+				<li>
+					<div class="thumb">
+						<img src="images/1.jpg" alt="gallery image or whatever" />
+					</div>
+					<div class="data">
+						<div><b>This is the title</b></div>
+						<div>01/01/2017</div>
+						<div>Lorem ipsum ding dong dang yo!</div>
+					</div>
+				</li>
+				<li>
+					<div class="thumb">
+						<img src="images/2.jpg" alt="gallery image or whatever" />
+					</div>
+					<div class="data">
+						<div><b>This is the title</b></div>
+						<div>01/01/2017</div>
+						<div>Lorem ipsum ding dong dang yo!</div>
+					</div>
+				</li>
+				<li>
+					<div class="thumb">
+						<img src="images/3.jpg" alt="gallery image or whatever" />
+					</div>
+					<div class="data">
+						<div><b>This is the title</b></div>
+						<div>01/01/2017</div>
+						<div>Lorem ipsum ding dong dang yo!</div>
+					</div>
+				</li>
+				<li>
+					<div class="thumb">
+						<img src="images/4.jpg" alt="gallery image or whatever" />
+					</div>
+					<div class="data">
+						<div><b>This is the title</b></div>
+						<div>01/01/2017</div>
+						<div>Lorem ipsum ding dong dang yo!</div>
+					</div>
+				</li>
+				<li>
+					<div class="thumb">
+						<img src="images/5.jpg" alt="gallery image or whatever" />
+					</div>
+					<div class="data">
+						<div><b>This is the title</b></div>
+						<div>01/01/2017</div>
+						<div>Lorem ipsum ding dong dang yo!</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<hr />
+
+		<p>Here is a paragraph to make sure stuff is resizing correctly</p>
+
+		<script>
+			$('.simple-list-grid').simpleListGrid();
+		</script>
+	</body>
+</html>

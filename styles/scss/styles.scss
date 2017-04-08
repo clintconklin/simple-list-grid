@@ -4,8 +4,7 @@ body {
 	padding: 20px;
 }
 
-/* don't nest this in .resultset, so measuring works correctly */
-.resultset-list-grid {
+.simple-list-grid {
 	-webkit-transition: all $list-grid-transition-time ease-in;
 	-moz-transition: all $list-grid-transition-time ease-in;
 	-o-transition: all $list-grid-transition-time ease-in;
@@ -26,6 +25,7 @@ body {
 		li {
 			padding: 1rem;
 			width: 100%;
+			opacity: 0; // gets set to 1 in the plugin animate function
 			border: 1px solid #ccc;
 
 			-webkit-transition: all $list-grid-transition-time ease-in;
@@ -43,12 +43,6 @@ body {
 					width: 100%;
 				}
 			}
-
-			/*&.grid {
-				.thumb {
-					float: none;
-				}
-			}*/
 
 			&:after {
 				content: "";

@@ -1,3 +1,6 @@
-# List Grid
+# Simple List Grid
 
-Seems to work!
+A dead simple list/grid togglin' jquery plugin.
+
+![Simple List Grid Example](http://github.com/clintconklin/simple-list-grid/demo.gif)
+
