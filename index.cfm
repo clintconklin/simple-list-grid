@@ -17,7 +17,7 @@
 		<!---<p class="clearfix"><a id="toggler" class="btn btn-primary pull-right"><!---<i class="fa fa-list" aria-hidden="true"></i>---><i class="fa fa-th" aria-hidden="true"></i> Switch to Grid</a></p>--->
 
 		<div class="resultset">
-			<div class="list-grid">
+			<div class="resultset-list-grid">
 				<ul class="list-grid-ul">
 					<cfloop from="1" to="5" index="current">
 						<li>
@@ -27,7 +27,7 @@
 							<div class="data">
 								<div><b>This is the title</b></div>
 								<div>01/01/2017</div>
-								<div>Lorem ipsum ding dong dang</div>
+								<div>Lorem ipsum ding dong dang yo!</div>
 							</div>
 						</li>
 					</cfloop>
@@ -40,7 +40,7 @@
 		<p>Here is a paragraph to make sure stuff is resizing correctly</p>
 
 		<script>
-			$('.list-grid').listGrid();
+			$('.resultset-list-grid').listGrid();
 		</script>
 	</body>
 </html>

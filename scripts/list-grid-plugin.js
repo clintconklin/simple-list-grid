@@ -27,16 +27,31 @@
 
 	var pluginName = 'listGrid',
 		defaults = {
-			'propertyName': 'value'
+			'state': 'list',
+			'margin': 10,
+			'delay': 50
 		};
 
 	function Plugin (element, options) {
 		var that = this;
 		this.element = element;
 		this.$element = $(element);
-		this.body = $('body');
 
+		this.settings = $.extend({}, defaults, options);
+		this._defaults = defaults;
+		this._name = pluginName;
+
+		this.initialized = false;
+		this.body = $('body');
 		this.list = this.$element.find('ul.list-grid-ul');
+		console.dir(this.list);
+
+		this.state = this.settings.state;
+		this.delay = this.settings.delay; // milliseconds between animations
+		this.margin = this.settings.margin; // top and left margins
+		this.height = 0; // global height in grid mode
+
+		this.elems = [];
 
 		var toggleContainer = $('<p />', {
 			'class': 'clearfix'
@@ -46,20 +61,11 @@
 			'class': 'btn btn-default btn-sm pull-right',
 			'html': '<i class="fa fa-th" aria-hidden="true"></i>',
 			'click': function() {
-				that.list.toggleClass('grid');
-				that.recomputeHeight = true;
+				that.state = (that.state === 'list') ? 'grid' : 'list';
 				that.render();
 			}
 		}).appendTo(toggleContainer);
 
-		this.margin = 10; // top and left margins
-		this.height = 0; // global height in grid mode
-
-		this.elems = [];
-
-		this.settings = $.extend({}, defaults, options);
-		this._defaults = defaults;
-		this._name = pluginName;
 		this.init();
 	}
 
@@ -73,29 +79,39 @@
 		'render': function() {
 			this.measure();
 
-			if (this.list.hasClass('grid')) {
+			if (this.state === 'grid') {
 				this.doGrid();
 			} else {
 				this.doList();
 			}
+
+			if (this.initialized === false) { this.initialized = true; }
+		},
+
+		'animate': function(data, top, left, width, height, delay) {
+			window.setTimeout(function() {
+				data.li.css({
+					'position': 'absolute',
+					'top': top + 'px',
+					'left': left + 'px',
+					'width': width + 'px',
+					'height': height + 'px'
+				});
+			}, ((this.initialized === false) ? 0 : delay));
 		},
 
 		'doList': function() {
 			var that = this;
 
 			var top = 0;
+			var delay = 0;
 			$.each(this.elems, function(current) {
 				if (current > 0) {
 					top += that.elems[current - 1].height + that.margin;
 				}
 
-				this.li.css({
-					'position': 'absolute',
-					'top': top + 'px',
-					'left': 0 + 'px',
-					'width': this.width + 'px',
-					'height': this.height + 'px'
-				});
+				that.animate(this, top, 0, this.width, this.height, delay);
+				delay += that.delay;
 			});
 
 			this.$element.css('height', top + this.elems[this.elems.length - 1].height + 'px');
@@ -108,7 +124,7 @@
 			var width = this.$element.outerWidth();
 			var top = 0;
 			var left = 0;
-
+			var delay = this.delay;
 			$.each(this.elems, function(current) {
 				if (current > 0) {
 					var newLeft = left + that.elems[current - 1].width + that.margin;
@@ -120,13 +136,8 @@
 					}
 				}
 
-				this.li.css({
-					'position': 'absolute',
-					'top': top + 'px',
-					'left': left + 'px',
-					'width': this.width + 'px',
-					'height': that.height + 'px'
-				});
+				that.animate(this, top, left, this.width, that.height, delay);
+				delay += that.delay;
 			});
 
 			this.$element.css('height', top + this.height + 'px');
@@ -161,7 +172,7 @@
 				li.appendTo(ul);
 
 				var width;
-				if (that.list.hasClass('grid')) {
+				if (that.state === 'grid') {
 					width = li.find('.thumb').outerWidth() +
 						parseInt(li.css('padding-left').replace(/px/, '')) +
 						parseInt(li.css('padding-right').replace(/px/, '')) +
