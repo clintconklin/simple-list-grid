@@ -45,6 +45,7 @@
 		this.body = $('body');
 		this.list = this.$element.find('ul.list-grid-ul');
 
+		this.disabled = true; // initializes as disabled; will be set to false once the init render runs
 		this.state = this.settings.state;
 		this.delay = this.settings.delay; // milliseconds between animations
 		this.margin = this.settings.margin; // top and left margins
@@ -60,8 +61,11 @@
 			'class': 'btn btn-default btn-sm pull-right',
 			'html': '<i class="fa fa-th" aria-hidden="true"></i>',
 			'click': function() {
-				that.state = (that.state === 'list') ? 'grid' : 'list';
-				that.render();
+				if (that.disabled === false) {
+					that.disabled = true;
+					that.state = (that.state === 'list') ? 'grid' : 'list';
+					that.render();
+				}
 			}
 		}).appendTo(toggleContainer);
 
@@ -97,7 +101,7 @@
 					'height': height + 'px',
 					'opacity': 1
 				});
-			}, ((this.initialized === false) ? 0 : delay));
+			}, delay);
 		},
 
 		'doList': function() {
@@ -112,11 +116,14 @@
 				}
 
 				that.animate(this, top, 0, this.width, this.height, delay);
-				delay += that.delay;
+				if (that.initialized === true) { delay += that.delay; }
 			});
 
-			this.$element.css('height', top + this.elems[this.elems.length - 1].height + 'px');
-			this.toggle.html('<i class="fa fa-th" aria-hidden="true"></i>');
+			window.setTimeout(function() {
+				that.$element.css('height', top + that.elems[that.elems.length - 1].height + 'px');
+				that.toggle.html('<i class="fa fa-th" aria-hidden="true"></i>');
+				that.disabled = false;
+			}, delay);
 		},
 
 		'doGrid': function() {
@@ -139,15 +146,14 @@
 				}
 
 				that.animate(this, top, left, this.width, that.height, delay);
-				delay += that.delay;
+				if (that.initialized === true) { delay += that.delay; }
 			});
 
-			// grid animates up, so wait 'til all the other elements are done
 			window.setTimeout(function() {
 				that.$element.css('height', top + that.height + 'px');
+				that.toggle.html('<i class="fa fa-list" aria-hidden="true"></i>');
+				that.disabled = false;
 			}, delay);
-
-			this.toggle.html('<i class="fa fa-list" aria-hidden="true"></i>');
 		},
 
 		'measure': function() {
