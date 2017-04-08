@@ -2,5 +2,5 @@
 
 A dead simple list/grid togglin' jquery plugin.
 
-![Simple List Grid Example](http://github.com/clintconklin/simple-list-grid/demo.gif)
+![Simple List Grid Example](https://github.com/clintconklin/simple-list-grid/blob/master/images/demo.gif)
 
